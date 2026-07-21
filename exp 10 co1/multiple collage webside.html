@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC College Website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+body{
+    background:#f4f4f4;
+    color:#333;
+}
+header{
+    background:#003366;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+nav{
+    background:#00509e;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+}
+nav a:hover{
+    background:#003366;
+}
+section{
+    display:none;
+    padding:30px;
+    background:white;
+    margin:20px auto;
+    width:90%;
+    max-width:1000px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+section.active{
+    display:block;
+}
+h2{
+    color:#003366;
+    margin-bottom:15px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+table,th,td{
+    border:1px solid #ccc;
+}
+th{
+    background:#003366;
+    color:white;
+}
+th,td{
+    padding:10px;
+}
+footer{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:20px;
+}
+input,textarea{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+}
+button{
+    background:#003366;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+}
+button:hover{
+    background:#00509e;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ABC College</h1>
+<p>Creating a Multi-Page College Website</p>
+</header>
+
+<nav>
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('about')">About</a>
+<a href="#" onclick="showPage('courses')">Courses</a>
+<a href="#" onclick="showPage('admission')">Admission</a>
+<a href="#" onclick="showPage('contact')">Contact</a>
+</nav>
+
+<section id="home" class="active">
+<h2>Home</h2>
+<p>Welcome to ABC College. We are committed to providing quality education and helping students build successful careers.</p>
+
+<h3>Highlights</h3>
+<ul>
+<li>Experienced Faculty</li>
+<li>Modern Computer Labs</li>
+<li>Digital Library</li>
+<li>Sports Facilities</li>
+<li>100% Placement Assistance</li>
+</ul>
+</section>
+
+<section id="about">
+<h2>About Us</h2>
+<p>ABC College was established to provide excellent education in Engineering, Science, Commerce, and Arts. Our campus offers modern classrooms, laboratories, and student-friendly facilities.</p>
+</section>
+
+<section id="courses">
+<h2>Courses Offered</h2>
+
+<table>
+<tr>
+<th>Course</th>
+<th>Duration</th>
+</tr>
+
+<tr>
+<td>B.Sc Computer Science</td>
+<td>3 Years</td>
+</tr>
+
+<tr>
+<td>BCA</td>
+<td>3 Years</td>
+</tr>
+
+<tr>
+<td>B.Com</td>
+<td>3 Years</td>
+</tr>
+
+<tr>
+<td>BBA</td>
+<td>3 Years</td>
+</tr>
+
+<tr>
+<td>MCA</td>
+<td>2 Years</td>
+</tr>
+
+</table>
+</section>
+
+<section id="admission">
+<h2>Admission</h2>
+
+<p>Admissions are open for the academic year.</p>
+
+<ol>
+<li>Fill the Application Form.</li>
+<li>Submit Required Documents.</li>
+<li>Attend Counseling.</li>
+<li>Pay Admission Fees.</li>
+</ol>
+
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+
+<form>
+
+<label>Name</label>
+<input type="text" placeholder="Enter your name">
+
+<label>Email</label>
+<input type="email" placeholder="Enter your email">
+
+<label>Message</label>
+<textarea rows="5" placeholder="Enter your message"></textarea>
+
+<button type="button" onclick="alert('Message Sent Successfully!')">Submit</button>
+
+</form>
+
+</section>
+
+<footer>
+© 2026 ABC College | Multi-Page College Website
+</footer>
+
+<script>
+function showPage(page){
+let pages=document.querySelectorAll("section");
+pages.forEach(function(section){
+section.classList.remove("active");
+});
+document.getElementById(page).classList.add("active");
+}
+</script>
+
+</body>
+</html>

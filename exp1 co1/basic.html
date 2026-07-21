@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic HTML Web Page</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+header{
+    background:#004080;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+nav{
+    background:#0066cc;
+    text-align:center;
+    padding:12px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    text-decoration:underline;
+}
+
+.container{
+    width:80%;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+img{
+    width:250px;
+    display:block;
+    margin:20px auto;
+    border-radius:10px;
+}
+
+button{
+    display:block;
+    margin:20px auto;
+    padding:12px 20px;
+    background:#004080;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0066cc;
+}
+
+footer{
+    background:#004080;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Welcome to My Basic HTML Web Page</h1>
+<p>Simple HTML, CSS & JavaScript Example</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Services</a>
+<a href="#">Contact</a>
+</nav>
+
+<div class="container">
+
+<h2>About This Web Page</h2>
+
+<p>
+This is a basic HTML web page created using a single HTML file.
+It demonstrates the use of headings, paragraphs, images,
+navigation links, buttons, and JavaScript.
+</p>
+
+<img src="https://via.placeholder.com/250" alt="Sample Image">
+
+<button onclick="showMessage()">Click Here</button>
+
+<p id="message" style="text-align:center;font-weight:bold;color:green;"></p>
+
+</div>
+
+<footer>
+© 2026 Basic HTML Web Page | Web Technology Lab
+</footer>
+
+<script>
+function showMessage(){
+    document.getElementById("message").innerHTML =
+    "Hello! Welcome to my Basic HTML Web Page.";
+}
+</script>
+
+</body>
+</html>

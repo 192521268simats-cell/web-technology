@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Profile Page</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#4facfe,#00c6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:420px;
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+.profile-img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid white;
+    margin-top:15px;
+}
+
+.content{
+    padding:25px;
+}
+
+.info{
+    font-size:17px;
+    margin:12px 0;
+}
+
+.info span{
+    color:#003366;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    background:#003366;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0059b3;
+}
+
+#status{
+    margin-top:15px;
+    text-align:center;
+    color:green;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    background:#f2f2f2;
+    padding:12px;
+    color:#555;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h2>Student Profile</h2>
+
+<!-- Replace babyshalini.jpg with your photo -->
+<img src="babyshalini.jpg" alt="Baby Shalini E" class="profile-img">
+
+<h2>Baby Shalini E</h2>
+<p>B.Sc Computer Science</p>
+
+</div>
+
+<div class="content">
+
+<div class="info"><span>Roll Number :</span> 23CS101</div>
+
+<div class="info"><span>Department :</span> Computer Science</div>
+
+<div class="info"><span>Year :</span> II Year</div>
+
+<div class="info"><span>Email :</span> babyshalini@gmail.com</div>
+
+<div class="info"><span>Phone :</span> +91 9876543210</div>
+
+<div class="info"><span>College :</span> ABC College</div>
+
+<div class="info"><span>Skills :</span> HTML, CSS, JavaScript</div>
+
+<button onclick="showStatus()">View Profile Status</button>
+
+<p id="status"></p>
+
+</div>
+
+<footer>
+© 2026 Student Profile Page
+</footer>
+
+</div>
+
+<script>
+function showStatus(){
+    document.getElementById("status").innerHTML =
+    "Profile Verified Successfully ✔";
+}
+</script>
+
+</body>
+</html>
