@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | Saveetha University Event Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <span class="uni-name">Saveetha University</span>
+    <span class="portal-title">Event Registration Portal</span>
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#footer">Contact</a></li>
+      <li><a href="registration.html" class="nav-cta">Register</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="registration-wrap">
+  <a href="index.html#events" class="back-link">&larr; Back to events</a>
+
+  <div class="reg-card">
+    <h2 id="form-heading">Event Registration</h2>
+    <p class="reg-sub" id="form-sub">Fill in your details below to confirm your seat.</p>
+
+    <form id="regForm" novalidate>
+      <div class="form-row">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="e.g. Priya Ramanathan" required>
+      </div>
+
+      <div class="form-row">
+        <label for="regNo">Register Number</label>
+        <input type="text" id="regNo" name="regNo" placeholder="e.g. 21CS0456" required>
+      </div>
+
+      <div class="form-row">
+        <label for="department">Department</label>
+        <select id="department" name="department" required>
+          <option value="" disabled selected>Select your department</option>
+          <option>Computer Science &amp; Engineering</option>
+          <option>Electronics &amp; Communication</option>
+          <option>Mechanical Engineering</option>
+          <option>Biotechnology</option>
+          <option>Business Administration</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@saveetha.edu.in" required>
+      </div>
+
+      <div class="form-row">
+        <label for="eventSelect">Event</label>
+        <select id="eventSelect" name="event" required>
+          <option value="" disabled>Select an event</option>
+          <option value="TechnoVerse Hackathon">TechnoVerse Hackathon — Technical</option>
+          <option value="Rangoli &amp; Cultural Fest">Rangoli &amp; Cultural Fest — Cultural</option>
+          <option value="Campus Placement Drive">Campus Placement Drive — Placement</option>
+          <option value="Inter-Dept Sports Meet">Inter-Dept Sports Meet — Sports</option>
+        </select>
+        <small>Arrived from a catalogue card? Your event is already selected.</small>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Registration</button>
+      <div class="confirm-banner" id="confirmBanner">You're registered! A confirmation has been noted — see you at the event.</div>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>events@saveetha.edu.in</li>
+        <li>+91 44 2680 1580</li>
+        <li>Saveetha Nagar, Thandalam, Chennai</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Useful Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="registration.html">Register</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li>Student Affairs Office</li>
+        <li>Directorate of Sports &amp; Culture</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span style="font-weight:700;">2026</span> Saveetha University. All rights reserved.
+  </div>
+</footer>
+
+<a href="mailto:events@saveetha.edu.in" class="help-btn" title="Need help?">?</a>
+
+<script>
+  // Pre-select the event when arriving from a catalogue card, e.g.
+  // registration.html?event=TechnoVerse%20Hackathon
+  const params = new URLSearchParams(window.location.search);
+  const chosenEvent = params.get("event");
+  const eventSelect = document.getElementById("eventSelect");
+
+  if (chosenEvent) {
+    // Match by value against the dropdown options
+    [...eventSelect.options].forEach(opt => {
+      if (opt.value === chosenEvent) opt.selected = true;
+    });
+    document.getElementById("form-sub").textContent =
+      `You're registering for "${chosenEvent}". Fill in your details to confirm your seat.`;
+  }
+
+  // Lightweight client-side confirmation (no backend required for this assessment)
+  document.getElementById("regForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("confirmBanner").classList.add("show");
+    this.querySelector(".btn-submit").textContent = "Registered ✓";
+  });
+</script>
+
+</body>
+</html>
