@@ -1,0 +1,473 @@
+/* =========================================================================
+   SAVEETHA UNIVERSITY — EVENT REGISTRATION PORTAL
+   Main external stylesheet
+   Used across index.html and registration.html (multi-page site).
+   Justification: an external sheet is the right choice for a multi-page
+   site because both pages share the header, footer and card/button styles —
+   one file keeps the look consistent and means a single edit updates every
+   page, instead of duplicating rules per page.
+   ========================================================================= */
+
+/* -------------------- 1. Design tokens -------------------- */
+:root {
+  --pink-deep:      #d81b5e;   /* primary brand pink   */
+  --pink-mid:       #ff5f96;   /* buttons / accents    */
+  --pink-soft:      #ffd6e4;   /* light accent / chips */
+  --pink-bg:        #fff3f7;   /* page background      */
+  --paper:          #ffffff;   /* card background      */
+  --ink:            #33212a;   /* body text            */
+  --ink-soft:       #7a5c68;   /* muted text           */
+  --gold:           #f4b942;   /* status: open         */
+  --gray-status:    #b9a4ac;   /* status: closed       */
+
+  --font-display: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body:    'Inter', 'Segoe UI', sans-serif;
+
+  --radius: 16px;
+  --shadow-card: 0 10px 24px rgba(216, 27, 94, 0.12);
+  --shadow-card-hover: 0 18px 34px rgba(216, 27, 94, 0.22);
+}
+
+/* -------------------- 2. Reset & base (element selectors) -------------------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--pink-bg);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden; /* prevents accidental horizontal scroll on mobile */
+}
+
+h1, h2, h3 { /* group selector */
+  font-family: var(--font-display);
+  color: var(--pink-deep);
+  margin: 0 0 0.4em;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+/* attribute selector — style every required text-style input the same way */
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--pink-soft);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--ink);
+  background: var(--paper);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* pseudo-class: focus state */
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--pink-deep);
+  box-shadow: 0 0 0 4px rgba(216, 27, 94, 0.15);
+}
+
+/* -------------------- 3. Header / sticky navigation -------------------- */
+.site-header {
+  position: sticky;   /* beyond-normal-flow technique 1: sticky nav */
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 6%;
+  background: var(--paper);
+  box-shadow: 0 2px 14px rgba(216, 27, 94, 0.10);
+}
+
+.brand { display: flex; flex-direction: column; }
+
+.brand .uni-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--pink-deep);
+  letter-spacing: 0.3px;
+}
+
+.brand .portal-title {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.nav-menu {
+  list-style: none;      /* other property: list-style */
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+/* child selector */
+.nav-menu > li {
+  position: relative;
+}
+
+.nav-menu a {
+  display: inline-block;   /* prevents the pill background from splitting across lines if text wraps */
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  padding: 6px 2px;
+  cursor: pointer; /* other property: cursor */
+}
+
+/* pseudo-element underline that grows on hover */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--pink-deep);
+  transition: width 0.3s ease; /* other property: transition */
+}
+
+.nav-menu a:hover::after,
+.nav-menu a:focus::after {
+  width: 100%;
+}
+
+.nav-menu a.nav-cta {
+  background: var(--pink-deep);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 999px;
+}
+
+.nav-menu a.nav-cta:hover {
+  background: var(--pink-mid);
+}
+
+/* -------------------- 4. Hero section --------------------
+   NOTE: #hero's visual styling is intentionally handled by an INTERNAL
+   <style> block inside index.html <head> (see that file) to demonstrate
+   internal CSS on one clearly identified section. This external sheet
+   deliberately leaves #hero alone so the two methods don't collide. */
+
+/* -------------------- 5. Event catalogue (Grid layout) -------------------- */
+.catalogue {
+  padding: 60px 6% 40px;
+  max-width: 1200px;   /* other property: max-width */
+  margin: 0 auto;
+}
+
+.catalogue > .section-heading {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.section-heading p {
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 6px auto 0;
+}
+
+.event-grid {
+  display: grid;                                   /* primary layout: CSS Grid */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* -------------------- Event card: ticket-stub design (signature element) -------------------- */
+.event-card {
+  position: relative;              /* beyond-normal-flow technique 2: relative + absolute badge */
+  background: var(--paper);
+  border: 1px solid var(--pink-soft);   /* box model: border  */
+  border-radius: var(--radius);
+  padding: 24px;                        /* box model: padding */
+  margin: 4px 0 18px;                   /* box model: margin  */
+  box-shadow: var(--shadow-card);
+  overflow: hidden;                     /* other property: overflow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* purposeful transition */
+}
+
+.event-card:hover {
+  transform: translateY(-8px) scale(1.015); /* other property: transform */
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ticket "perforation" cut-outs — pseudo-elements, positioned + z-index */
+.event-card::before,
+.event-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  background: var(--pink-bg);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px var(--pink-soft);
+}
+.event-card::before { left: -13px; }
+.event-card::after  { right: -13px; }
+
+.event-card .dashed-divider {
+  border: none;
+  border-top: 2px dashed var(--pink-soft);
+  margin: 14px 0;
+}
+
+.category-badge {
+  position: absolute;     /* status badge positioned beyond normal flow */
+  top: 18px;
+  right: 22px;
+  z-index: 3;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--pink-mid);
+}
+
+.category-badge[data-category="cultural"]   { background: #c9509a; }
+.category-badge[data-category="placement"]  { background: #9b5de5; }
+.category-badge[data-category="sports"]     { background: #ff8fab; }
+
+.event-card h3 {
+  font-size: 1.15rem;
+  padding-right: 70px; /* keep title clear of the badge */
+}
+
+.event-meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.event-meta span { font-weight: 600; color: var(--ink); }
+
+.event-desc {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 10px 0 14px;
+}
+
+/* attribute selector driving colour + label of the status pill */
+.status-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.status-pill[data-status="open"] {
+  background: rgba(244, 185, 66, 0.18);
+  color: #a06a00;
+}
+
+.status-pill[data-status="closing"] {
+  background: rgba(216, 27, 94, 0.12);
+  color: var(--pink-deep);
+}
+
+.btn-register {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 11px 0;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid)); /* other property: gradient */
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-register:hover,
+.btn-register:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(216, 27, 94, 0.28);
+}
+
+/* -------------------- 6. Registration page -------------------- */
+.registration-wrap {
+  max-width: 620px;
+  margin: 48px auto 70px;
+  padding: 0 6%;
+}
+
+.registration-wrap .back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: var(--pink-deep);
+}
+
+.reg-card {
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid var(--pink-soft);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+}
+
+.reg-card p.reg-sub {
+  color: var(--ink-soft);
+  margin-top: -6px;
+  margin-bottom: 22px;
+  font-size: 0.94rem;
+}
+
+.form-row {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-row label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.form-row small {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 13px 0;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink-deep), var(--pink-mid));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-submit:hover { transform: translateY(-2px); }
+.btn-submit:active { opacity: 0.85; }
+
+.confirm-banner {
+  display: none;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(244, 185, 66, 0.18);
+  color: #7a5200;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.confirm-banner.show { display: block; }
+
+/* -------------------- 7. Fixed help button -------------------- */
+.help-btn {
+  position: fixed;              /* beyond-normal-flow technique 3: fixed */
+  bottom: 26px;
+  right: 26px;
+  z-index: 200;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--pink-deep);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px rgba(216, 27, 94, 0.35);
+  cursor: pointer;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.15); /* other property: text-shadow */
+  transition: transform 0.25s ease;
+}
+
+.help-btn:hover { transform: scale(1.08) rotate(8deg); }
+
+/* -------------------- 8. Footer -------------------- */
+.site-footer {
+  background: #2c1420;
+  color: #f3d9e4;
+  padding: 40px 6% 24px;
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid h4 {
+  color: #ffd6e4;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.footer-grid ul { list-style: none; padding: 0; margin: 0; }
+.footer-grid li { margin-bottom: 6px; font-size: 0.88rem; opacity: 0.85; }
+.footer-grid a:hover { color: #ffd6e4; text-decoration: underline; }
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+/* -------------------- 9. Responsive: mobile media query -------------------- */
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: 14px;
+  }
+  .nav-menu li:not(:last-child) a:not(.nav-cta) {
+    display: none; /* condense nav on small screens, keep Register visible */
+  }
+  .event-grid {
+    grid-template-columns: 1fr;   /* single column on small screens */
+  }
+  .catalogue { padding: 40px 5% 20px; }
+  .reg-card { padding: 22px; }
+
+  /* Drop the badge into normal flow above the title on small cards, instead
+     of floating over text — keeps long event names from colliding with it. */
+  .category-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .event-card h3 {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand .uni-name { font-size: 1rem; }
+  .help-btn { width: 46px; height: 46px; }
+}
