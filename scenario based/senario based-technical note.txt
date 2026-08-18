@@ -1,0 +1,51 @@
+# Technical Note — Saveetha University Event Registration Portal
+
+## 1. CSS methods used
+- **External** (`style.css`) — the main stylesheet, shared by `index.html` and `registration.html`.
+  Best choice for a multi-page site: one edit updates the look everywhere, and the browser caches
+  it once instead of re-downloading styles per page.
+- **Internal** (`<style>` in `index.html <head>`) — used only for the `#hero` section, to demonstrate
+  page-scoped CSS that doesn't need to be reused elsewhere.
+- **Inline** — used on one small element only: the `<span style="font-weight:700;">` around the
+  copyright year in the footer.
+
+## 2. Selector types used
+Element (`body`, `h1`), class (`.event-card`), attribute (`input[type="email"]`,
+`.status-pill[data-status="open"]`), group (`h1, h2, h3`), child (`.nav-menu > li`),
+pseudo-class (`:hover`, `:focus`), pseudo-element (`::before`, `::after`).
+
+## 3. Box model — event card width calculation
+Example card, default **content-box** model:
+- Content width: `260px`
+- Padding: `24px` each side → `+48px`
+- Border: `1px` each side → `+2px`
+- Horizontal margin: `0` (spacing comes from grid `gap`, not margin)
+
+**Total rendered width = 260 + 48 + 2 = 310px**
+
+If `box-sizing: border-box` is applied with the same declared `width: 260px`, padding and border
+are drawn *inside* that 260px instead of being added on top. The box's total width stays exactly
+260px, but the usable content area shrinks to `260 − 48 − 2 = 210px`.
+
+## 4. Layout method
+CSS Grid (`display: grid; grid-template-columns: repeat(4, 1fr);`) lays out the event catalogue —
+four columns on desktop, collapsing to one column under the mobile media query.
+
+## 5. Positioning techniques (beyond normal flow)
+- `position: sticky` on the header, so navigation stays visible while scrolling.
+- `position: fixed` on the help button, pinned to the viewport corner.
+- `position: absolute` + `z-index` on the category badge and the ticket "perforation" cut-outs
+  (`::before`/`::after`), layered above the card without disturbing card content flow.
+
+## 6. Responsive behaviour
+One media query at `max-width: 768px` switches the event grid to a single column and simplifies
+the nav; a second at `max-width: 480px` tightens header/button sizing. Tested at a 375px mobile
+viewport with no horizontal scroll.
+
+## 7. Testing evidence — two issues found and corrected
+1. **Issue:** at 375px, the 4-column grid forced cards to shrink until text clipped.
+   **Fix:** added `grid-template-columns: 1fr` inside the `max-width: 768px` media query.
+2. **Issue:** the absolutely-positioned category badge overlapped long event titles.
+   **Fix:** added `padding-right: 70px` to `.event-card h3` to reserve clear space for the badge.
+
+Browsers tested: Mozilla Firefox and Chromium, at desktop width and a 375px mobile viewport.
