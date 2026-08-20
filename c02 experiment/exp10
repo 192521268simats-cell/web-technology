@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Debug Web Application</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+nav{
+    background:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    color:#5b21b6;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:50px auto;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    text-align:center;
+}
+
+.card h1{
+    color:#4c1d95;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#666;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    background:#5b21b6;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7c3aed;
+}
+
+#output{
+    margin-top:25px;
+    padding:20px;
+    background:#f3f4ff;
+    border-radius:10px;
+    font-weight:bold;
+    color:#4c1d95;
+}
+
+footer{
+    background:white;
+    text-align:center;
+    padding:18px;
+}
+
+@media(max-width:600px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>Student Portal</h2>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#">Debug App</a></li>
+
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Debug Calculator</h1>
+
+<p>
+Enter two numbers and calculate their sum.
+</p>
+
+<input
+type="number"
+id="num1"
+placeholder="Enter first number"
+>
+
+<input
+type="number"
+id="num2"
+placeholder="Enter second number"
+>
+
+<button id="calculateBtn">
+Calculate
+</button>
+
+<div id="output">
+Result will appear here
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Student Portal | Debugged Web Application
+</footer>
+
+<script>
+
+/*
+    Corrected JavaScript:
+
+    1. Correct element IDs
+    2. Correct event listener
+    3. Correct number conversion
+    4. Correct DOM updating
+*/
+
+const num1 =
+document.getElementById("num1");
+
+const num2 =
+document.getElementById("num2");
+
+const button =
+document.getElementById("calculateBtn");
+
+const output =
+document.getElementById("output");
+
+
+button.addEventListener("click",function(){
+
+    let a = Number(num1.value);
+
+    let b = Number(num2.value);
+
+    if(num1.value === "" || num2.value === ""){
+
+        output.innerText =
+        "Please enter both numbers.";
+
+        return;
+
+    }
+
+    let result = a + b;
+
+    output.innerText =
+    "Result = " + result;
+
+});
+
+</script>
+
+</body>
+</html>
