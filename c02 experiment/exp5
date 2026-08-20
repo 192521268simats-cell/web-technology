@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC College</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7ff;
+    color:#333;
+}
+
+/* Navigation */
+
+nav{
+    background:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+nav h2{
+    color:#4c1d95;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#5b21b6;
+}
+
+/* Hero */
+
+.hero{
+    min-height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+}
+
+.hero h1{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.btn{
+    display:inline-block;
+    padding:13px 25px;
+    background:white;
+    color:#5b21b6;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Sections */
+
+section{
+    padding:60px 8%;
+}
+
+.section-title{
+    text-align:center;
+    color:#4c1d95;
+    margin-bottom:30px;
+}
+
+/* About */
+
+.about{
+    background:white;
+    text-align:center;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.8;
+}
+
+/* Courses */
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.course{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+    border-top:5px solid #667eea;
+}
+
+.course h3{
+    color:#4c1d95;
+    margin-bottom:12px;
+}
+
+/* Facilities */
+
+.facility-grid{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.facility{
+    width:220px;
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.facility h3{
+    color:#5b21b6;
+}
+
+/* Contact */
+
+.contact{
+    background:#eeeaff;
+    text-align:center;
+}
+
+.contact p{
+    margin:10px;
+}
+
+/* Footer */
+
+footer{
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* Responsive */
+
+@media(max-width:750px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        gap:12px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .course-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+<h2>ABC College</h2>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#courses">Courses</a></li>
+<li><a href="#facilities">Facilities</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+
+<!-- Hero -->
+
+<header class="hero" id="home">
+
+<div>
+
+<h1>Welcome to ABC College</h1>
+
+<p>
+Learn Today. Lead Tomorrow.
+</p>
+
+<a href="#courses" class="btn">
+Explore Courses
+</a>
+
+</div>
+
+</header>
+
+
+<!-- About -->
+
+<section class="about" id="about">
+
+<h2 class="section-title">About Our College</h2>
+
+<p>
+ABC College provides quality education with modern
+facilities, experienced faculty and a student-friendly
+learning environment. Our goal is to prepare students
+for successful careers and a bright future.
+</p>
+
+</section>
+
+
+<!-- Courses -->
+
+<section id="courses">
+
+<h2 class="section-title">Our Courses</h2>
+
+<div class="course-grid">
+
+<div class="course">
+<h3>Computer Science</h3>
+<p>Programming, Web Development and Software Engineering.</p>
+</div>
+
+<div class="course">
+<h3>Information Technology</h3>
+<p>Networking, Databases and Modern IT Technologies.</p>
+</div>
+
+<div class="course">
+<h3>Artificial Intelligence</h3>
+<p>Machine Learning, Data Science and AI Applications.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- Facilities -->
+
+<section id="facilities">
+
+<h2 class="section-title">Our Facilities</h2>
+
+<div class="facility-grid">
+
+<div class="facility">
+<h3>💻 Computer Lab</h3>
+<p>Modern computer laboratories.</p>
+</div>
+
+<div class="facility">
+<h3>📚 Library</h3>
+<p>Large collection of books.</p>
+</div>
+
+<div class="facility">
+<h3>🏫 Classrooms</h3>
+<p>Smart and comfortable classrooms.</p>
+</div>
+
+<div class="facility">
+<h3>⚽ Sports</h3>
+<p>Excellent sports facilities.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- Contact -->
+
+<section class="contact" id="contact">
+
+<h2 class="section-title">Contact Us</h2>
+
+<p>📍 Chennai, Tamil Nadu</p>
+
+<p>📧 abccollege@gmail.com</p>
+
+<p>📞 +91 9876543210</p>
+
+</section>
+
+
+<footer>
+
+© 2026 ABC College | All Rights Reserved
+
+</footer>
+
+</body>
+</html>
