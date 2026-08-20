@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Online Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+nav{
+    background:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    color:#5b21b6;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:45px auto;
+}
+
+.quiz-card{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+h1{
+    text-align:center;
+    color:#4c1d95;
+    margin-bottom:25px;
+}
+
+.question{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.option{
+    background:#f3f4ff;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#ddd9ff;
+}
+
+.option input{
+    margin-right:10px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    margin-top:20px;
+    border:none;
+    border-radius:8px;
+    background:#5b21b6;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7c3aed;
+}
+
+#result{
+    text-align:center;
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+    color:#16a34a;
+}
+
+.progress{
+    text-align:center;
+    color:#777;
+    margin-bottom:20px;
+}
+
+footer{
+    background:white;
+    text-align:center;
+    padding:18px;
+}
+
+@media(max-width:600px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>Student Portal</h2>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Quiz</a></li>
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="quiz-card">
+
+<h1>Online Quiz</h1>
+
+<div id="quiz"></div>
+
+<button id="nextBtn">
+Next Question
+</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Student Portal | Online Quiz
+</footer>
+
+<script>
+
+const questions = [
+
+{
+question:"Which language is used to create web pages?",
+options:["HTML","Python","Java","C"],
+answer:"HTML"
+},
+
+{
+question:"Which language is used for styling web pages?",
+options:["HTML","CSS","Java","Python"],
+answer:"CSS"
+},
+
+{
+question:"Which language is used for web page interactivity?",
+options:["C","JavaScript","SQL","HTML"],
+answer:"JavaScript"
+},
+
+{
+question:"Which symbol is used for an ID selector in CSS?",
+options:[".","#","*","@"],
+answer:"#"
+},
+
+{
+question:"Which method is used to select an element by ID?",
+options:[
+"getElementById()",
+"getElement()",
+"selectId()",
+"getId()"
+],
+answer:"getElementById()"
+}
+
+];
+
+let current = 0;
+let score = 0;
+
+const quiz = document.getElementById("quiz");
+const nextBtn = document.getElementById("nextBtn");
+const result = document.getElementById("result");
+
+function loadQuestion(){
+
+    let q = questions[current];
+
+    quiz.innerHTML = `
+
+    <div class="progress">
+    Question ${current+1} of ${questions.length}
+    </div>
+
+    <div class="question">
+    ${q.question}
+    </div>
+
+    ${q.options.map(function(option){
+
+        return `
+
+        <label class="option">
+
+        <input
+        type="radio"
+        name="answer"
+        value="${option}"
+        >
+
+        ${option}
+
+        </label>
+
+        `;
+
+    }).join("")}
+
+    `;
+
+}
+
+nextBtn.addEventListener("click",function(){
+
+    let selected =
+    document.querySelector(
+        'input[name="answer"]:checked'
+    );
+
+    if(!selected){
+
+        alert("Please select an answer");
+
+        return;
+
+    }
+
+    if(selected.value === questions[current].answer){
+
+        score++;
+
+    }
+
+    current++;
+
+    if(current < questions.length){
+
+        loadQuestion();
+
+    }
+    else{
+
+        quiz.innerHTML = "";
+
+        nextBtn.style.display="none";
+
+        result.innerHTML =
+        `🎉 Your Score: ${score} / ${questions.length}`;
+
+    }
+
+});
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
