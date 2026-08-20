@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Result Analysis</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    color:#333;
+}
+
+nav{
+    background:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    color:#5b21b6;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+h1{
+    text-align:center;
+    color:#4c1d95;
+    margin-bottom:25px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+input{
+    padding:13px;
+    border:2px solid #ddd;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:none;
+    background:#5b21b6;
+    color:white;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7c3aed;
+}
+
+.result{
+    margin-top:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#667eea;
+    color:white;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.box{
+    background:#f3f4ff;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+}
+
+.box strong{
+    display:block;
+    color:#4c1d95;
+    margin-bottom:5px;
+}
+
+footer{
+    background:white;
+    text-align:center;
+    padding:18px;
+}
+
+@media(max-width:650px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<h2>Student Portal</h2>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Results</a></li>
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Student Result Analysis</h1>
+
+<div class="form-grid">
+
+<input id="name" placeholder="Student Name">
+
+<input id="roll" placeholder="Roll Number">
+
+<input id="m1" type="number" placeholder="HTML Mark">
+
+<input id="m2" type="number" placeholder="CSS Mark">
+
+<input id="m3" type="number" placeholder="JavaScript Mark">
+
+<input id="m4" type="number" placeholder="Java Mark">
+
+</div>
+
+<button onclick="analyze()">Analyze Result</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Student Portal | Result Analysis System
+</footer>
+
+<script>
+
+function analyze(){
+
+    let name=document.getElementById("name").value;
+    let roll=document.getElementById("roll").value;
+
+    let marks=[
+        Number(document.getElementById("m1").value),
+        Number(document.getElementById("m2").value),
+        Number(document.getElementById("m3").value),
+        Number(document.getElementById("m4").value)
+    ];
+
+    let total=0;
+
+    for(let i=0;i<marks.length;i++){
+        total+=marks[i];
+    }
+
+    let average=total/marks.length;
+
+    let highest=Math.max(...marks);
+    let lowest=Math.min(...marks);
+
+    let grade;
+
+    if(average>=90)
+        grade="A+";
+    else if(average>=80)
+        grade="A";
+    else if(average>=70)
+        grade="B";
+    else if(average>=60)
+        grade="C";
+    else if(average>=50)
+        grade="D";
+    else
+        grade="F";
+
+    let status=average>=50 ? "PASS" : "FAIL";
+
+    document.getElementById("result").innerHTML=`
+
+        <h2>Result</h2>
+
+        <table>
+
+        <tr>
+        <th>Student</th>
+        <th>Roll No</th>
+        <th>Total</th>
+        <th>Average</th>
+        </tr>
+
+        <tr>
+        <td>${name}</td>
+        <td>${roll}</td>
+        <td>${total}</td>
+        <td>${average.toFixed(2)}</td>
+        </tr>
+
+        </table>
+
+        <div class="summary">
+
+        <div class="box">
+        <strong>Highest</strong>
+        ${highest}
+        </div>
+
+        <div class="box">
+        <strong>Lowest</strong>
+        ${lowest}
+        </div>
+
+        <div class="box">
+        <strong>Grade</strong>
+        ${grade}
+        </div>
+
+        <div class="box">
+        <strong>Status</strong>
+        ${status}
+        </div>
+
+        </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
