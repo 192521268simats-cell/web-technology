@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+
+        nav {
+            background: #ffffff;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        nav h2 {
+            color: #5b21b6;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #5b21b6;
+        }
+
+        /* Main Container */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        /* Profile Card */
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        /* Profile Image */
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 6px solid #667eea;
+            object-fit: cover;
+        }
+
+        .profile-info h1 {
+            color: #4c1d95;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        /* About */
+
+        .about {
+            margin-top: 30px;
+        }
+
+        .about h2,
+        .details h2,
+        .skills h2 {
+            color: #4c1d95;
+            margin-bottom: 15px;
+        }
+
+        .about p {
+            line-height: 1.7;
+        }
+
+        /* Details */
+
+        .details {
+            margin-top: 30px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .detail-box {
+            background: #f3f4ff;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .detail-box strong {
+            color: #4c1d95;
+        }
+
+        /* Skills */
+
+        .skills {
+            margin-top: 30px;
+        }
+
+        .skill {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 20px;
+        }
+
+        /* Button */
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #5b21b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background: #7c3aed;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            background: #ffffff;
+            padding: 18px;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            .profile-top {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>Student Portal</h2>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- Main Content -->
+
+    <div class="container">
+
+        <div class="profile-card" id="profile">
+
+            <!-- Profile Top -->
+
+            <div class="profile-top">
+
+                <img
+                    src="https://i.pravatar.cc/160?img=47"
+                    class="profile-img"
+                    alt="Student Photo"
+                >
+
+                <div class="profile-info">
+
+                    <h1>Shalini</h1>
+
+                    <p><strong>Department:</strong> Computer Science</p>
+
+                    <p><strong>Year:</strong> III Year</p>
+
+                    <p><strong>College:</strong> ABC College of Engineering</p>
+
+                    <p><strong>Email:</strong> shalini@gmail.com</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- About -->
+
+            <div class="about">
+
+                <h2>About Me</h2>
+
+                <p>
+                    I am a computer science student interested in
+                    web development, programming and modern technologies.
+                    I enjoy creating simple and user-friendly applications.
+                </p>
+
+            </div>
+
+
+            <!-- Student Details -->
+
+            <div class="details">
+
+                <h2>Student Details</h2>
+
+                <div class="details-grid">
+
+                    <div class="detail-box">
+                        <strong>Student ID</strong>
+                        <p>CS2026001</p>
+                    </div>
+
+                    <div class="detail-box">
+                        <strong>Age</strong>
+                        <p>20</p>
+                    </div>
+
+                    <div class="detail-box">
+                        <strong>Course</strong>
+                        <p>B.Sc Computer Science</p>
+                    </div>
+
+                    <div class="detail-box">
+                        <strong>Location</strong>
+                        <p>Chennai, India</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Skills -->
+
+            <div class="skills" id="skills">
+
+                <h2>My Skills</h2>
+
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Java</span>
+                <span class="skill">Python</span>
+
+            </div>
+
+
+            <!-- Contact Button -->
+
+            <a href="mailto:shalini@gmail.com" class="btn">
+                Contact Me
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer id="contact">
+
+        <p>© 2026 Student Profile | All Rights Reserved</p>
+
+    </footer>
+
+</body>
+</html>
