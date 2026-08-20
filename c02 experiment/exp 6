@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart To-Do List</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:#333;
+}
+
+/* Navigation */
+
+nav{
+    background:white;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+nav h2{
+    color:#5b21b6;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#5b21b6;
+}
+
+/* Main */
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:45px auto;
+}
+
+.todo-card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.todo-card h1{
+    text-align:center;
+    color:#4c1d95;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+}
+
+/* Input */
+
+.input-area{
+    display:flex;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    padding:13px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#667eea;
+}
+
+.add-btn{
+    padding:13px 20px;
+    border:none;
+    border-radius:8px;
+    background:#5b21b6;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add-btn:hover{
+    background:#7c3aed;
+}
+
+/* List */
+
+ul{
+    list-style:none;
+    margin-top:25px;
+}
+
+li{
+    background:#f3f4ff;
+    margin-bottom:12px;
+    padding:15px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-left:5px solid #667eea;
+}
+
+.task-text{
+    flex:1;
+    margin-left:10px;
+}
+
+.completed{
+    text-decoration:line-through;
+    color:#888;
+}
+
+.actions button{
+    border:none;
+    padding:7px 10px;
+    border-radius:6px;
+    margin-left:5px;
+    cursor:pointer;
+}
+
+.edit{
+    background:#f59e0b;
+    color:white;
+}
+
+.delete{
+    background:#dc2626;
+    color:white;
+}
+
+.check{
+    width:18px;
+    height:18px;
+}
+
+/* Footer */
+
+footer{
+    background:white;
+    text-align:center;
+    padding:18px;
+}
+
+@media(max-width:600px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .input-area{
+        flex-direction:column;
+    }
+
+    li{
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<h2>Student Portal</h2>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Tasks</a></li>
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="todo-card">
+
+<h1>My To-Do List</h1>
+
+<p class="subtitle">
+Organize your daily tasks easily
+</p>
+
+<div class="input-area">
+
+<input
+type="text"
+id="taskInput"
+placeholder="Enter a new task..."
+>
+
+<button class="add-btn" id="addBtn">
+Add Task
+</button>
+
+</div>
+
+<ul id="taskList"></ul>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Student Portal | To-Do Application
+</footer>
+
+<script>
+
+let tasks = [];
+
+let editIndex = -1;
+
+const input = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
+
+/* Add / Update */
+
+addBtn.addEventListener("click", function(){
+
+    let text = input.value.trim();
+
+    if(text === ""){
+        alert("Please enter a task");
+        return;
+    }
+
+    if(editIndex === -1){
+
+        let task = {
+            text:text,
+            completed:false
+        };
+
+        tasks.push(task);
+
+    }
+    else{
+
+        tasks[editIndex].text = text;
+
+        editIndex = -1;
+
+        addBtn.innerText = "Add Task";
+
+    }
+
+    input.value = "";
+
+    displayTasks();
+
+});
+
+/* Display */
+
+function displayTasks(){
+
+    taskList.innerHTML = "";
+
+    tasks.forEach(function(task,index){
+
+        let li = document.createElement("li");
+
+        li.innerHTML = `
+
+        <input
+        type="checkbox"
+        class="check"
+        ${task.completed ? "checked" : ""}
+        >
+
+        <span class="task-text ${task.completed ? "completed" : ""}">
+        ${task.text}
+        </span>
+
+        <div class="actions">
+
+        <button class="edit">
+        Edit
+        </button>
+
+        <button class="delete">
+        Delete
+        </button>
+
+        </div>
+
+        `;
+
+        /* Checkbox */
+
+        li.querySelector(".check")
+        .addEventListener("change",function(){
+
+            task.completed = this.checked;
+
+            displayTasks();
+
+        });
+
+        /* Edit */
+
+        li.querySelector(".edit")
+        .addEventListener("click",function(){
+
+            input.value = task.text;
+
+            editIndex = index;
+
+            addBtn.innerText = "Update";
+
+            input.focus();
+
+        });
+
+        /* Delete */
+
+        li.querySelector(".delete")
+        .addEventListener("click",function(){
+
+            tasks.splice(index,1);
+
+            displayTasks();
+
+        });
+
+        taskList.appendChild(li);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
